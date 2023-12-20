@@ -1,0 +1,150 @@
+Լաբորատոր աշխատանք 5
+ԻԿՄ 2-րդ կուրս 202 խումբ
+Քոչարյան Դայանա
+
+1. Ստեղծել կամայական արժեքով փոփոխական՝ str: Ցուցադրել հետեւյալ հրամանների աշխատանքի արդյունքի տարբերությունը.
+#! /bin/bash
+echo $str2
+echo ${str}2
+
+str="hello" 
+echo $str2
+echo ${str}2
+hello2
+
+2. Արտածել հետեւյալ արտահայտության արժեքը. (5^2 * 4) / 10
+#! /bin/bash
+echo $((5**2*4/10))
+10
+
+3. Ցուցադրել հետեւյալ հրամանների աշխատանքի արդյունքի տարբերությունը.
+echo "The balance for user $USER is: $5.00"
+echo "The balance for user $USER is: \$5.00"
+
+echo "The balance for user $USER is: $5.00" 
+The balance for user dayana is: .00
+
+echo "The balance for user $USER is: \$5.00"
+The balance for user dayana is: $5.00
+
+//$5 անունով փոփոխական չկան
+
+4. Ցուցադրել հետեւյալ հրամանների աշխատանքի արդյունքի տարբերությունը.
+echo '$USER $((2 + 2)) $(ls)'
+echo "$USER $((2 + 2)) $(ls)"
+
+echo '$USER $((2 + 2)) $(ls)'
+$USER $((2 + 2)) $(ls)
+
+dayana@Dayanas-MacBook-Pro desktop % echo "$USER $((2 + 2)) $(ls)"
+dayana 4 Dayana
+Homework
+Linux
+Screenshot 2023-12-05 at 21.00.53.png
+Slack.app
+Terminal
+Visual Studio Code.app
+c++
+hello.sh
+LinuxLabs
+python
+
+// ""-ի մեջ գրելու դեպքում $-ից հետո գրվածները փոփոխականներ են համարվում, իսկ ''-ի մեջ տեքստ։
+
+5. Առանձին տողերում արտածել ընթացիկ դիրեկտորիան եւ այնտեղ առկա տեքստային ֆայլերի քանակը։ Օգտագործել Here document:
+LinuxLabs
+cat <<EOF
+Current Directory: $(pwd)
+Number of Files: $(ls | wc -l)
+EOF
+
+Current Directory: /Users/dayana/desktop
+Number of Files:       13
+
+6. Գրել 2 թվեր գումարող ֆունկցիա։ Թվերը ֆունկցիային փոխանցել որպես արգումենտներ։
+
+summ() {
+	sum=$(( $1 + $2 ))
+    echo "The sum of $1 and $2 is: $sum"
+    }
+
+summ 14 7
+
+The sum of 14 and 7 is: 21
+
+7. Գրել ֆունկցիա, որը որպես արգումենտ կստանա դիրեկտորիայի անվանումը եւ կարտածի այնտեղ առկա ֆայլերի քանակը։
+
+count(){
+       cd $1
+       echo $(ls | wc -l)
+count /Users/dayana/desktop
+
+bash countfunc().sh 
+14
+
+8. Գրել սկրիպտ, որում նոր ստեղծված ֆայլի համար ստուգել, թե արդյոք այն ունի կարդալու / գրելու / կատարելու թույլտվություն, եւ արտածել համապատասխան հաղորդագրություն։
+
+file="new_file.txt"
+
+
+if [ -r "$file" ]; then
+    echo "$file has read permission."
+else
+    echo "$file does not have read permission."
+fi
+
+
+if [ -w "$file" ]; then
+    echo "$file has write permission."
+else
+    echo "$file does not have write permission."
+fi
+
+
+if [ -x "$file" ]; then
+    echo "$file has execute permission."
+else
+    echo "$file does not have execute permission."
+fi
+
+new_file.txt does not have read permission.
+new_file.txt does not have write permission.
+new_file.txt does not have execute permission.
+
+
+touch new.txt
+chmod +x check.sh
+./check.sh new.txt
+
+file="new.txt"
+
+new.txt has read permission.
+new.txt has write permission.
+new.txt has execute permission.
+
+9. Գրել սկրիպտ, որը կորոշի տրված 2 թվերից մեծագույնը եւ կարտածի։
+
+num1=14
+num2=54
+
+if [ "$num1" -gt "$num2" ]; then
+    echo "The largest number is: $num1"
+else
+    echo "The largest number is: $num2"
+fi
+
+The largest number is: 54
+
+10. Գրել սկրիպտ, որը կորոշի տրված թիվը զույգ է, թե կենտ։ Արտածել համապատասխան
+հաղորդագրություն։
+
+read -p "Enter number: " num
+
+if ((num % 2 == 0)); then
+    echo "$num is even"
+else
+    echo "$num is odd"
+fi
+
+Enter number: 47 
+47 is odd

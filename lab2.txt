@@ -1,0 +1,81 @@
+Լաբորատոր աշխատանք 2
+ԻԿՄ 2-րդ կուրս 202 խումբ
+Քոչարյան Դայանա
+
+1. Կատարել հետեւյալ հրամանները, բացատրել տարբերությունը.
+cat > file1
+cat file1
+cat < file1
+
+cat > file1 հրամանը մուտքագրում է ստեղնաշարից դեպի file1 
+cat file1 հրամանը ցուցադրում է file1-ի բովանդակությունը տերմինալում 
+cat < file1 հրամանը ցուցադրում է file1-ի բովանդակությունը՝ այն վերահղելով cat հրամանի մուտքագրման մեջ:
+
+2. Ստեղծել որոշակի պարունակությամբ 3 տեքստային ֆայլ՝ file1.txt, file2.txt, file3.txt։ Այս ֆայլերի պարունակությունը կցել միմյանց եւ գրել նոր ֆայլում՝ final.txt։
+cat > file1.txt
+file1
+cat > file2.txt
+file2
+cat > file3.txt
+file3
+cat > file4.txt
+cat file1.txt file2.txt file3.txt > final.txt
+
+
+3. Ցուցադրել /home/student դիրեկտորիայում տեքստային ֆայլերի քանակը։
+
+find /home/student -type f -name "*.txt" | wc -l
+
+4. Սորտավորել file1.txt, file2.txt, file3.txt ֆայլերի պարունակությունը եւ գրել նոր ֆայլում։
+
+cat file1.txt file2.txt file3.txt | sort > sorted.txt
+
+5. Արտածել /home/student դիրեկտորիայի առաջին 15 ֆայլերը՝ դասավորված նվազման կարգով ըստ ֆայլի ծավալի։
+
+ls -l /home/student | sort -r -k 5 | head -15      
+
+6. Արտածել /home/student դիրեկտորիայի ֆայլերի ցուցակը, միաժամանակ այն տեղադրելով ls.txt ֆայլում։
+
+ls /home/student/ > ls.txt | ls -l /home/student/
+
+7. Օգտագործելով tr հրամանը՝ գաղտնագրել "secret text" տողը ROT13 ալգորիթմով։ Վերծանել գաղտնագրված հաղորդագրությունը։
+
+echo "secret text" | tr a-m,n-z n-z,a-m        
+frperg grkg
+
+echo "frperg grkg" | tr n-z,a-m a-m,n-z
+secret text
+
+8. Ստեղծել նոր ֆայլ՝ home.txt, հետեւյալ պարունակությամբ.
+Student’s home directory is {home_dir}.
+sed հրամանի միջոցով փոխարինել {home_dir} հատվածը /home/student-ով։
+
+cat > home.txt
+Student’s home directory is {home_dir}
+sed -i '' 's/{home_dir}/\/home\/student/' home.txt
+
+9. Ստեղծել ֆայլ, որն ունի առնվազն 5 տող պարունակություն՝ file4.txt։ Արտածել 2-4-րդ տողերը։
+
+cat > file4.txt 
+a b c
+d e 
+123
+167 
+hello
+
+cat file4.txt | sed -n '2,4p'
+d e 
+123
+167
+
+10. Ջնջել file4.txt ֆայլի 2-4-րդ տողերը։
+
+sed -i '' -e '2,4d' file4.txt
+
+// a b c
+//hello
+
+
+
+
+
