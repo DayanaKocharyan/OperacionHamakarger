@@ -138,16 +138,73 @@ q
 
 6. Գրել ծրագիր, որը կստեղծի /home/student դիրեկտորիայի տեքստային ֆայլերի անունները պարունակող ֆայլ։ while ցիկլի միջոցով համարակալել այս ֆայլերի անունները եւ արտածել։
 
+count=1
+while read -r filename; do
+    echo "File $count: $filename"
+    count=$((count + 1))
+done < new.txt
 
 7. Գրել ծրագիր, որը for ցիկլի միջոցով կարտածի [0, 30] միջակայքում գտնվող 3-ի բազմապատիկ թվերը։
 
+for ((i=0; i<=30; i+=3)); do
+    echo $i
+done
+
+0
+3
+6
+9
+12
+15
+18
+21
+24
+27
+30
 
 8. Գրել ծրագիր, որը for ցիկլի միջոցով կարտածի ընթացիկ դիրեկտորիայի բոլոր տեքստային ֆայլերի անունները։
 
+for file in *.txt; do
+    echo $file
+done
 
 9. Գրել ծրագիր, որը որպես արգումենտ կստանա ֆայլերի անուններ, եւ այդ ֆայլերից յուրաքանչյուրի համար կարտածի ֆայլի ամենակարճ բառը եւ դրա երկարությունը։
 
+for file in "$@"; do
+    if [[ -r $file ]]; then
+        shortest=""
+        length=9999
+        while read -r word; do
+            if (( ${#word} < length && ${#word}!=0)); then
+                shortest=$word
+                length=${#word}
+            fi
+        done < "$file"
+        echo "File: $file | Shortest word: '$shortest' | Length: $length"
+    else
+        echo "$file: File not readable"
+    fi
+done
+
+first.sh second.sh 
+File: first.sh | Shortest word: 'aaaa' | Length: 4
+File: second.sh | Shortest word: 'bbbbbbbb' | Length: 8
 
 10. Գրել ծրագիր, որը որպես արգումենտներ կստանա ֆայլերի անուններ, եւ դրանցից յուրաքանչյուրի համար կստուգի, թե արդյո՞ք տվյալ ֆայլը գոյություն ունի, թե ոչ։ Գոյություն ունենալու դեպքում ստուգել, թե արդյո՞ք ֆայլն ունի կարդալու թույլտվություն։ Արտածել համապատասխան հաղորդագրություններ։
 
+for file in "$@"; do
+    if [ -e "$file" ]; then
+        if [ -r "$file" ]; then
+            echo "$file: File exists and is readable."
+        else
+            echo "$file: File exists but is not readable."
+        fi
+    else
+        echo "$file: File does not exist."
+    fi
+done
 
+new.txt first.sh second.sh
+new.txt: File exists and is readable.
+first.sh: File exists and is readable.
+second.sh: File exists and is readable.
