@@ -1,0 +1,2 @@
+# OperacionHamakarger
+Օպերացիոն համակարգեր
